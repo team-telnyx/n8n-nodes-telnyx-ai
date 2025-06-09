@@ -16,7 +16,7 @@ Keep functions short and focused on one task.
 Use meaningful variable and function names.
 Write code that is easy to understand over being clever.
 Try to follow the .github/PULL_REQUEST_TEMPLATE.md file instructions when opening a PR.
-For File name convention use PascalCase following the existing components in the project, for example: exampleNode.node.ts should be ExampleNode.node.ts
+For File name convention use PascalCase following the existing components in the project, for example: exampleNode.node.ts should be ExampleNode.node.ts. Also keep in mind the file name should be the same as the class name like files in the nodes folder should be ExampleNode.node.ts and files in the credentials folder should be ExampleCredentialsApi.credentials.ts.
 Always use naming exports for components.
 Always use absolute imports using the config set in tsconfig.json as base.
 Always double-check you implemented everything you have been asked.
