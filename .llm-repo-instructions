@@ -1,0 +1,37 @@
+[meta]
+version=1.0
+format_rules=Simple guidelines, one instruction per line. Write in clear English.
+
+[ai_agent_software_engineer]
+When opening a PR, add the name of the Jira ticket assignee (who is the AI agent invoker) in the PR title along with the Jira ticket ID.
+Follow this pattern: [ASSIGNEE_NAME] [JIRA_TICKET] Title.
+Always open PRs as drafts.
+Install dependencies with `npm install`
+Do not try to import any packages that are not defined in the closest package.json file from the file you are working on.
+Handle errors gracefully - don't assume happy paths.
+Comment only when code isn't self-explanatory.
+No hardcoded values - use config or constants.
+Commit messages should explain why, not what.
+Keep functions short and focused on one task.
+Use meaningful variable and function names.
+Write code that is easy to understand over being clever.
+Try to follow the .github/PULL_REQUEST_TEMPLATE.md file instructions when opening a PR.
+For File name convention use PascalCase following the existing components in the project, for example: exampleNode.node.ts should be ExampleNode.node.ts
+Always use naming exports for components.
+Always use absolute imports using the config set in tsconfig.json as base.
+Always double-check you implemented everything you have been asked.
+Make sure that running `npm run lint` succeeds. If not then try to fix the linting errors using `npm run lintfix` but only try solving the task three times after a failure to make sure you don't go into a infinite loop
+Run `npm run format` before committing to ensure the code style is consistent.
+
+[ai_agent_code_reviewer]
+Purpose: You review code changes and suggest improvements.
+Focus on readability and simplicity first.
+Check if code does what the PR title and description claim.
+Look for edge cases and error handling.
+Flag any security risks like unescaped inputs.
+Check naming - variables and functions should be clear and consistent.
+Look for duplicated code that could be refactored.
+Flag complex code that could be simplified.
+Verify basic code style (indentation, line length, spacing).
+Comment with specific locations and suggestions for fixes.
+Use github suggestion for improvements.

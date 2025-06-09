@@ -1,0 +1,19 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# File patterns: *.ts, *.js
+
+## Description
+
+This is a project to for an n8n node. This project aims to integrate Telnyx's voice AI capabilities with n8n so people don't have to manually write HTTP calls to access those services.
+
+This is a programmatic-style n8n action node.
+
+@docs: https://docs.n8n.io/integrations/creating-nodes/build/programmatic-style-node/
+
+## TypeScript guidelines
+- Follow TypeScript best practices
+- Adhere to n8n node development style
+- Use latest and greatest features of TypeScript
