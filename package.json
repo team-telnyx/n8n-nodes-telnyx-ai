@@ -1,7 +1,7 @@
 {
-  "name": "@telnyx/n8n-nodes-telnyx-voice-ai",
+  "name": "@telnyx/n8n-nodes-telnyx-ai",
   "version": "0.1.0",
-  "description": "Official Telnyx Voice AI node for n8n",
+  "description": "Official Telnyx AI node for n8n",
   "keywords": [
     "n8n-community-node-package",
     "Telnyx",
@@ -39,7 +39,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx rimraf dist && tsc && gulp build:icons",
-    "dev": "tsc --watch",
+    "dev": "gulp dev",
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",
     "lintfix": "eslint nodes credentials package.json --fix",
@@ -60,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@types/node": "^24.0.1",
     "@typescript-eslint/parser": "~8.32.0",
     "eslint": "^8.57.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.3",
