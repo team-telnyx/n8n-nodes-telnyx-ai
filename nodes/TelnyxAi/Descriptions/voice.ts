@@ -275,8 +275,6 @@ async function preSendSpeechToText(
 		formData.append('timestamp_granularities[]', 'segment');
 	}
 
-	console.log('formData', formData);
-
 	requestOptions.body = formData;
 	return requestOptions;
 }
