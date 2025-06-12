@@ -26,6 +26,6 @@ For the Voice `Resource` we have the following `Operations`:
 2. Generating text to speech: [Generate text to speech](https://api.telnyx.com/v2/text-to-speech/speech)
 3. Getting speech to text: [Generate speech to text](https://api.telnyx.com/v2/ai/audio/transcriptions)
 
-For the Chat `Resource` we have the following `Operatiosn`:
+For the Chat `Resource` we have the following `Operations`:
 
 1. Getting the models available: [Get All Models](https://api.telnyx.com/v2/ai/models)
