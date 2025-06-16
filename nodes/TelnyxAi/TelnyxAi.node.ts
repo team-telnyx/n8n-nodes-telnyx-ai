@@ -3,6 +3,7 @@ import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflo
 import { listSearch } from './Descriptions/utils';
 import { ChatOperations, ChatFields } from './Descriptions/chat';
 import { VoiceFields, VoiceOperations } from './Descriptions/voice';
+import { AssistantsOperations, AssistantsFields } from './Descriptions/assistants';
 
 export class TelnyxAi implements INodeType {
 	description: INodeTypeDescription = {
@@ -47,6 +48,10 @@ export class TelnyxAi implements INodeType {
 						name: 'Chat',
 						value: 'chat',
 					},
+					{
+						name: 'Assistant',
+						value: 'assistants',
+					},
 				],
 				default: 'chat',
 			},
@@ -54,6 +59,8 @@ export class TelnyxAi implements INodeType {
 			...ChatFields,
 			...VoiceOperations,
 			...VoiceFields,
+			...AssistantsOperations,
+			...AssistantsFields,
 		],
 	};
 	methods = {
