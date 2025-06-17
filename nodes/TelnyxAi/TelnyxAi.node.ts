@@ -4,6 +4,7 @@ import { listSearch } from './Descriptions/utils';
 import { ChatOperations, ChatFields } from './Descriptions/chat';
 import { VoiceFields, VoiceOperations } from './Descriptions/voice';
 import { AssistantsOperations, AssistantsFields } from './Descriptions/assistants';
+import { AssistantEventsOperations, AssistantEventsFields } from './Descriptions/assistantEvents';
 
 export class TelnyxAi implements INodeType {
 	description: INodeTypeDescription = {
@@ -52,6 +53,10 @@ export class TelnyxAi implements INodeType {
 						name: 'Assistant',
 						value: 'assistants',
 					},
+					{
+						name: 'Assistant Event',
+						value: 'assistantEvents',
+					},
 				],
 				default: 'chat',
 			},
@@ -61,6 +66,8 @@ export class TelnyxAi implements INodeType {
 			...VoiceFields,
 			...AssistantsOperations,
 			...AssistantsFields,
+			...AssistantEventsOperations,
+			...AssistantEventsFields,
 		],
 	};
 	methods = {
