@@ -79,6 +79,22 @@ export const AssistantEventsOperations: INodeProperties[] = [
 					},
 				},
 			},
+			/**
+			 * Delete a scheduled event by event ID
+			 */
+			{
+				name: 'Delete',
+				value: 'delete',
+				action: 'Delete an event',
+				description: 'Delete a scheduled event by event ID',
+				routing: {
+					request: {
+						method: 'DELETE',
+						url: '=/v2/ai/assistants/{{$parameter["assistant"]}}/scheduled_events/{{$parameter["eventId"]}}',
+						returnFullResponse: true,
+					},
+				},
+			},
 		],
 		default: 'getAll',
 	},
@@ -123,7 +139,7 @@ export const AssistantEventsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['assistantEvents'],
-				operation: ['get'],
+				operation: ['get', 'delete'],
 			},
 		},
 		description: 'The ID of the event to retrieve',
@@ -346,7 +362,7 @@ export const AssistantEventsFields: INodeProperties[] = [
 		name: 'conversation_metadata',
 		type: 'json',
 		placeholder: '{ "key": "value" }',
-		default: {},
+		default: '{}',
 		displayOptions: {
 			show: {
 				resource: ['assistantEvents'],
