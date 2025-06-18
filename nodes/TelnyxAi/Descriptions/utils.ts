@@ -3,6 +3,7 @@ import { ITelnyxVoiceResponse } from '../@types/voice';
 import { ITelnyxModelsResponse } from '../@types/chat';
 import { ITelnyxAssistantsResponse } from '../@types/assistants';
 import { ITelnyxAssistantEventsResponse } from '../@types/assistantEvents';
+import { ITelnyxConversationsResponse } from '../@types/conversations';
 
 export const listSearch = {
 	async listVoices(this: ILoadOptionsFunctions): Promise<INodeListSearchResult> {
@@ -72,8 +73,6 @@ export const listSearch = {
 			}) as { value: string }
 		).value;
 
-		console.log('assistantId', assistantId);
-
 		const scheduledEventsResponse = (await this.helpers.httpRequestWithAuthentication.call(
 			this,
 			'telnyxApi',
@@ -83,11 +82,32 @@ export const listSearch = {
 			},
 		)) as ITelnyxAssistantEventsResponse;
 
-		console.log('scheduledEventsResponse', scheduledEventsResponse);
-
 		const returnData: INodeListSearchItems[] = scheduledEventsResponse.data.map((event) => ({
 			name: event.scheduled_event_id ?? 'No scheduled event ID',
 			value: event.scheduled_event_id ?? 'No scheduled event ID',
+		}));
+
+		return {
+			results: returnData,
+		};
+	},
+
+	async listConversations(this: ILoadOptionsFunctions): Promise<INodeListSearchResult> {
+		const conversationsResponse = (await this.helpers.httpRequestWithAuthentication.call(
+			this,
+			'telnyxApi',
+			{
+				method: 'GET',
+				url: 'https://api.telnyx.com/v2/ai/conversations',
+				qs: {
+					limit: 100,
+				},
+			},
+		)) as ITelnyxConversationsResponse;
+
+		const returnData: INodeListSearchItems[] = conversationsResponse.data.map((conversation) => ({
+			name: conversation.id,
+			value: conversation.id,
 		}));
 
 		return {

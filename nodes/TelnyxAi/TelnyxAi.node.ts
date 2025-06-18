@@ -5,6 +5,7 @@ import { ChatOperations, ChatFields } from './Descriptions/chat';
 import { VoiceFields, VoiceOperations } from './Descriptions/voice';
 import { AssistantsOperations, AssistantsFields } from './Descriptions/assistants';
 import { AssistantEventsOperations, AssistantEventsFields } from './Descriptions/assistantEvents';
+import { ConversationsOperations, ConversationsFields } from './Descriptions/conversations';
 
 export class TelnyxAi implements INodeType {
 	description: INodeTypeDescription = {
@@ -42,20 +43,24 @@ export class TelnyxAi implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Voice',
-						value: 'voice',
-					},
-					{
-						name: 'Chat',
-						value: 'chat',
-					},
-					{
 						name: 'Assistant',
 						value: 'assistants',
 					},
 					{
 						name: 'Assistant Event',
 						value: 'assistantEvents',
+					},
+					{
+						name: 'Chat',
+						value: 'chat',
+					},
+					{
+						name: 'Conversation',
+						value: 'conversations',
+					},
+					{
+						name: 'Voice',
+						value: 'voice',
 					},
 				],
 				default: 'chat',
@@ -68,6 +73,8 @@ export class TelnyxAi implements INodeType {
 			...AssistantsFields,
 			...AssistantEventsOperations,
 			...AssistantEventsFields,
+			...ConversationsOperations,
+			...ConversationsFields,
 		],
 	};
 	methods = {
