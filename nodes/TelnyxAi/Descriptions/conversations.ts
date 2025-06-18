@@ -1,4 +1,4 @@
-import { IExecuteSingleFunctions, IHttpRequestOptions, INodeProperties } from 'n8n-workflow';
+import { INodeProperties } from 'n8n-workflow';
 
 export const ConversationsOperations: INodeProperties[] = [
 	{
@@ -22,9 +22,6 @@ export const ConversationsOperations: INodeProperties[] = [
 						method: 'GET',
 						url: '/v2/ai/conversations',
 					},
-					send: {
-						preSend: [handleGetManyConversations],
-					},
 					output: {
 						postReceive: [
 							{
@@ -46,6 +43,61 @@ export const ConversationsOperations: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '=/v2/ai/conversations/{{$parameter["conversationId"]}}',
+					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'data',
+								},
+							},
+						],
+					},
+				},
+			},
+			{
+				name: 'Get Messages',
+				value: 'getMessages',
+				action: 'Get conversation messages',
+				description:
+					'Retrieve messages for a specific conversation, including tool calls made by the assistant',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '=/v2/ai/conversations/{{$parameter["conversationId"]}}/messages',
+					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'data',
+								},
+							},
+						],
+					},
+				},
+			},
+			{
+				name: 'Get Conversation Insights',
+				value: 'getConversationInsights',
+				action: 'Get insights for a conversation',
+				description: 'Retrieve insights for a specific conversation',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '=/v2/ai/conversations/{{$parameter["conversationId"]}}/conversations-insights',
+					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: {
+									property: 'data',
+								},
+							},
+						],
 					},
 				},
 			},
@@ -81,7 +133,7 @@ export const ConversationsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['conversations'],
-				operation: ['get'],
+				operation: ['get', 'getMessages', 'getConversationInsights'],
 			},
 		},
 	},
@@ -278,11 +330,3 @@ export const ConversationsFields: INodeProperties[] = [
 		],
 	},
 ];
-
-async function handleGetManyConversations(
-	this: IExecuteSingleFunctions,
-	requestOptions: IHttpRequestOptions,
-): Promise<IHttpRequestOptions> {
-	console.log('handleGetManyConversations', requestOptions);
-	return requestOptions;
-}
