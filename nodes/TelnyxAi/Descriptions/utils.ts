@@ -72,8 +72,6 @@ export const listSearch = {
 			}) as { value: string }
 		).value;
 
-		console.log('assistantId', assistantId);
-
 		const scheduledEventsResponse = (await this.helpers.httpRequestWithAuthentication.call(
 			this,
 			'telnyxApi',
@@ -82,8 +80,6 @@ export const listSearch = {
 				url: `https://api.telnyx.com/v2/ai/assistants/${assistantId}/scheduled_events`,
 			},
 		)) as ITelnyxAssistantEventsResponse;
-
-		console.log('scheduledEventsResponse', scheduledEventsResponse);
 
 		const returnData: INodeListSearchItems[] = scheduledEventsResponse.data.map((event) => ({
 			name: event.scheduled_event_id ?? 'No scheduled event ID',
