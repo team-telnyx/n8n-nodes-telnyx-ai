@@ -7,12 +7,17 @@ import { ITelnyxConversationsResponse } from '../@types/conversations';
 
 export const listSearch = {
 	async listVoices(this: ILoadOptionsFunctions): Promise<INodeListSearchResult> {
+		const elevenLabsApiKeyRef = this.getNodeParameter('elevenlabs_api_key_ref_2', '') as string;
+
 		const voicesResponse = (await this.helpers.httpRequestWithAuthentication.call(
 			this,
 			'telnyxApi',
 			{
 				method: 'GET',
 				url: 'https://api.telnyx.com/v2/text-to-speech/voices',
+				qs: {
+					elevenlabs_api_key_ref: elevenLabsApiKeyRef,
+				},
 			},
 		)) as ITelnyxVoiceResponse;
 
