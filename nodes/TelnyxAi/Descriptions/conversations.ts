@@ -59,9 +59,25 @@ export const ConversationsFields: INodeProperties[] = [
 		displayName: 'Conversation ID',
 		description: 'The conversation to retrieve',
 		name: 'conversationId',
-		type: 'string',
+		type: 'resourceLocator',
 		required: true,
-		default: '',
+		default: { mode: 'list', value: null },
+		modes: [
+			{
+				displayName: 'From list',
+				name: 'list',
+				type: 'list',
+				typeOptions: {
+					searchListMethod: 'listConversations',
+					searchable: true,
+				},
+			},
+			{
+				displayName: 'ID',
+				name: 'id',
+				type: 'string',
+			},
+		],
 		displayOptions: {
 			show: {
 				resource: ['conversations'],

@@ -15,4 +15,10 @@ export interface ITelnyxConversation {
 
 export interface ITelnyxConversationsResponse {
 	data: ITelnyxConversation[];
+	meta: {
+		total_pages: number;
+		total_results: number;
+		page_number: number;
+		page_size: number;
+	};
 }
