@@ -82,6 +82,53 @@ export const VoiceOperations: INodeProperties[] = [
 ];
 
 export const VoiceFields: INodeProperties[] = [
+	{
+		displayName: 'Provider',
+		name: 'provider',
+		type: 'options',
+		options: [
+			{ name: 'AWS', value: 'aws' },
+			{ name: 'Azure', value: 'azure' },
+			{ name: 'ElevenLabs', value: 'elevenlabs' },
+			{ name: 'Telnyx', value: 'telnyx' },
+		],
+		default: 'telnyx',
+		description: 'Filter voices by provider',
+		displayOptions: {
+			show: {
+				resource: ['voice'],
+				operation: ['getAll'],
+			},
+		},
+		routing: {
+			send: {
+				type: 'query',
+				property: 'provider',
+			},
+		},
+	},
+	{
+		displayName: 'ElevenLabs API Key Reference',
+		name: 'elevenlabs_api_key_ref',
+		type: 'string',
+		default: '',
+		required: true,
+		description:
+			'Reference to your ElevenLabs API key stored in Integration Secrets on Telnyx Portal',
+		displayOptions: {
+			show: {
+				resource: ['voice'],
+				operation: ['getAll'],
+				provider: ['elevenlabs'],
+			},
+		},
+		routing: {
+			send: {
+				type: 'query',
+				property: 'elevenlabs_api_key_ref',
+			},
+		},
+	},
 	// Text to Speech
 	{
 		displayName: 'Voice',
@@ -94,6 +141,12 @@ export const VoiceFields: INodeProperties[] = [
 			show: {
 				resource: ['voice'],
 				operation: ['textToSpeech'],
+			},
+		},
+		disabledOptions: {
+			show: {
+				includeElevenLabsVoices: [true],
+				elevenlabs_api_key_ref_2: [''],
 			},
 		},
 		modes: [
@@ -117,6 +170,35 @@ export const VoiceFields: INodeProperties[] = [
 			send: {
 				type: 'body',
 				property: 'voice',
+			},
+		},
+	},
+	{
+		displayName: 'Include ElevenLabs Voices',
+		name: 'includeElevenLabsVoices',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to include ElevenLabs voices in the response',
+		displayOptions: {
+			show: {
+				resource: ['voice'],
+				operation: ['textToSpeech'],
+			},
+		},
+	},
+	{
+		displayName: 'ElevenLabs API Key Reference',
+		name: 'elevenlabs_api_key_ref_2',
+		type: 'string',
+		default: '',
+		required: true,
+		description:
+			'Reference to your ElevenLabs API key stored in Integration Secrets on Telnyx Portal',
+		displayOptions: {
+			show: {
+				resource: ['voice'],
+				operation: ['textToSpeech'],
+				includeElevenLabsVoices: [true],
 			},
 		},
 	},
