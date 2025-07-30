@@ -20,8 +20,8 @@ export const ChatOperations: INodeProperties[] = [
 			{
 				name: 'Get Many',
 				value: 'getAll',
-				action: 'Get many models',
-				description: 'Returns metadata about many models',
+				action: 'Get many chat models',
+				description: 'Returns metadata about many chat models',
 				routing: {
 					request: {
 						method: 'GET',
@@ -55,7 +55,7 @@ export const ChatOperations: INodeProperties[] = [
 				name: 'Create Chat Completion',
 				value: 'createChatCompletion',
 				action: 'Create chat completion',
-				description: 'Chat with a language model',
+				description: 'Chat a new chat completion with a language model',
 				routing: {
 					request: {
 						method: 'POST',
