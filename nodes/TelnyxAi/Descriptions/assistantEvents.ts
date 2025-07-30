@@ -93,6 +93,16 @@ export const AssistantEventsOperations: INodeProperties[] = [
 						url: '=/v2/ai/assistants/{{$parameter["assistant"]}}/scheduled_events/{{$parameter["eventId"]}}',
 						returnFullResponse: true,
 					},
+					output: {
+						postReceive: [
+							{
+								type: 'set',
+								properties: {
+									value: '={{ { "deleted": true } }}',
+								},
+							},
+						],
+					},
 				},
 			},
 		],
