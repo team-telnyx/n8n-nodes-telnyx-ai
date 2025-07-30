@@ -11,7 +11,7 @@ export class TelnyxAi implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Telnyx AI',
 		name: 'telnyxAi',
-		icon: 'file:telnyx.svg',
+		icon: { light: 'file:telnyx.svg', dark: 'file:telnyx.dark.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
