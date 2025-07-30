@@ -108,20 +108,6 @@ export const ChatFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Messages',
-		name: 'messages',
-		description: 'A list of chat messages for context',
-		type: 'json',
-		default: '[]',
-		required: true,
-		displayOptions: {
-			show: {
-				resource: ['chat'],
-				operation: ['createChatCompletion'],
-			},
-		},
-	},
-	{
 		displayName: 'Model',
 		description: 'The model to chat with',
 		name: 'model',
@@ -148,6 +134,69 @@ export const ChatFields: INodeProperties[] = [
 				displayName: 'ID',
 				name: 'id',
 				type: 'string',
+			},
+		],
+	},
+	{
+		displayName: 'Messages',
+		name: 'messages',
+		type: 'fixedCollection',
+		typeOptions: {
+			sortable: true,
+			multipleValues: true,
+		},
+		displayOptions: {
+			show: {
+				resource: ['chat'],
+				operation: ['createChatCompletion'],
+			},
+		},
+		placeholder: 'Add Message',
+		default: { values: [{ content: '', role: 'user' }] },
+		required: true,
+		options: [
+			{
+				displayName: 'Values',
+				name: 'values',
+				values: [
+					{
+						displayName: 'Prompt',
+						name: 'content',
+						type: 'string',
+						description: 'The content of the message to be send',
+						default: '',
+						placeholder: 'e.g. Hello, how can you help me?',
+						typeOptions: {
+							rows: 2,
+						},
+					},
+					{
+						displayName: 'Role',
+						name: 'role',
+						type: 'options',
+						description:
+							"Role in shaping the model's response, it tells the model how it should behave and interact with the user",
+						options: [
+							{
+								name: 'User',
+								value: 'user',
+								description: 'Send a message as a user and get a response from the model',
+							},
+							{
+								name: 'Assistant',
+								value: 'assistant',
+								description: 'Tell the model to adopt a specific tone or personality',
+							},
+							{
+								name: 'System',
+								value: 'system',
+								description:
+									"Usually used to set the model's behavior or context for the next user message",
+							},
+						],
+						default: 'user',
+					},
+				],
 			},
 		],
 	},
@@ -327,12 +376,12 @@ async function preSendChatCompletion(
 		}
 	).value;
 
-	let messages: string | IDataObject[] = this.getNodeParameter('messages', '[]') as string;
-	try {
-		messages = JSON.parse(messages);
-	} catch (error) {
-		messages = [];
-	}
+	const messagesCollection = this.getNodeParameter('messages', { values: [] }) as {
+		values: Array<{ content: string; role: string }>;
+	};
+
+	const messages = messagesCollection.values || [];
+
 	const api_key_ref = this.getNodeParameter('api_key_ref', '') as string;
 	const stream = this.getNodeParameter('stream', false) as boolean;
 	const response_format = this.getNodeParameter('response_format', 'text') as string;
