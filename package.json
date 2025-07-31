@@ -31,7 +31,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/team-telnyx/n8n-nodes-telnyx-ai.git"
+    "url": "git+https://github.com/team-telnyx/n8n-nodes-telnyx-ai.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": ">=20.15"
