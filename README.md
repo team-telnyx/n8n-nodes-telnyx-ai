@@ -94,7 +94,7 @@ This node is built using n8n's programmatic-style node architecture and follows 
 
 ## Version history
 
-### 1.5.0 (Current)
+### 1.5.5 (Current)
 
 - Comprehensive Telnyx Voice AI integration
 - Support for Assistants, Chat, Voice, Conversations, and Assistant Events
