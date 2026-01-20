@@ -1,7 +1,5 @@
 import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
 
-
-
 export class TelnyxMessaging implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Telnyx Messaging',
